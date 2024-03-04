@@ -1,5 +1,3 @@
-// supabase.js
-
 import { createClient } from '@supabase/supabase-js';
 
 const SUPABASE_URL = 'https://ziyyljybqbyevfgaxvit.supabase.co'; // Substitua pela URL da API do seu projeto
