@@ -23,7 +23,7 @@ function Home() {
   const userEmail = user?.user_metadata?.email
 
   async function signOutUser() {
-    await supabase.auth.signOut({ scope: 'local' })
+    await supabase.auth.signOut()
     navigate("/")
   }
 
