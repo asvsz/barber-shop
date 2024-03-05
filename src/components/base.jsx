@@ -1,6 +1,6 @@
 function Base({children}) {
   return (
-    <div className="flex items-center h-screen w-screen bg-zinc-100 justify-center py-10">
+    <div className="flex h-screen w-screen bg-zinc-100 justify-center py-10">
       {children}
     </div>
   )
