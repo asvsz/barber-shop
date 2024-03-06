@@ -1,11 +1,12 @@
-import { NaviButtons } from "../components/navigation-buttons"
+import Base from "../components/base"
 
 function History() {
   return (
-    <div>
-      <NaviButtons />
-      Este é o Historico
-    </div>
+    <Base>
+      <div>
+        Este é o Historico
+      </div>
+    </Base>
   )
 }
 

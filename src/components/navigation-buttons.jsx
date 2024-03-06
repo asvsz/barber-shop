@@ -1,5 +1,3 @@
-import { FaHistory, FaHome } from "react-icons/fa";
-import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
 
 function NaviButtons() {

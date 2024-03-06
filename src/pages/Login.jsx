@@ -28,20 +28,16 @@ function Login() {
   }, [navigate])
 
   return (
-    <>
-      <Base>
-        <div className="flex flex-col items-center justify-center gap-10 p-8 rounded-lg bg-zinc-300 h-100 w-80">
-          <div className="flex justify-center items-center ">
-            <Auth
-              supabaseClient={supabase}
-              appearance={{ theme: ThemeSupa }}
-              providers={['google']}
-              showLinks={false}
-            />
-          </div>
-        </div>
-      </Base>
-    </>
+    <div className="flex h-screen w-screen bg-zinc-100 justify-center py-10 items-center">
+      <div className="flex flex-col items-center justify-center gap-10 rounded-lg bg-zinc-300 w-80 h-96">
+          <Auth
+            supabaseClient={supabase}
+            appearance={{ theme: ThemeSupa }}
+            providers={['google']}
+            showLinks={false}
+          />
+      </div>
+</div>
   )
 };
 
