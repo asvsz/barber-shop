@@ -35,8 +35,8 @@ function Profile() {
   return (
 
     <Base>
-      <div>
-        <img src={avatar} />
+      <div className="flex flex-col justify-center items-center gap-10">
+        <img className="h-30 w-30 rounded-full" src={avatar} />
         <h1>{userName}</h1>
         <h1>{userEmail}</h1>
         <button onClick={handleLogout}>
