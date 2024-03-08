@@ -1,30 +1,17 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Base from "../components/base"
 import Modal from "../components/modal"
 import ReserveCard from "../components/reserve-card"
+import { IoMdAdd } from "react-icons/io";
+import BoxCard from "../components/box-card"
+import { useReservas } from "../hooks/utils"
+import { MdDelete } from "react-icons/md";
 
 function Home() {
 
-  const [reservas, setReservas] = useState([])
-  const [modalOpen, setModalOpen] = useState(false)
 
-  useEffect(() => {
-
-    const getReservas = async () => {
-
-      try {
-        const response = await axios.get('https://system-barbeshop-1a0a77e5c400.herokuapp.com/barbearias')
-
-        setReservas(response.data)
-
-      } catch (error) {
-        console.log('Error ao pegar os dados:', error)
-      }
-    }
-
-    getReservas()
-  }, [])
+  const [modalOpen, setModalOpen] = useState(false);
+  const { reservas } = useReservas();
 
   return (
     <Base>
@@ -32,8 +19,10 @@ function Home() {
 
         <div className="flex justify-between pt-5">
           <h1 className="font-semibold text-4xl">Reservas Pendentes</h1>
-          <button className="rounded-lg bg-slate-300 hover:bg-blue-300 p-2"
+          <button className="flex items-center rounded-lg bg-blue-700 hover:bg-secondary
+          justify-between p-2 gap-2 text-primary hover:text-quinary"
             onClick={() => setModalOpen(true)}>
+            <IoMdAdd />
             Criar Reserva
           </button>
 
@@ -45,14 +34,23 @@ function Home() {
           }
         </div>
 
-        {/*Checagem se existe posts */}
-        {reservas.length === 0 ? (<p>Carregando...</p>) : (
-          reservas.map((reserva) => (
-            <div className=" mt-5 gap-5" key={reserva.id}>
-              <ReserveCard>{reserva.nome} {reserva.id}</ReserveCard>
-            </div>
-          ))
-        )}
+        <BoxCard>
+          {/*Checagem se existe posts */}
+          {reservas.length === 0 ? (
+            <p>Carregando...</p>
+          ) : (
+            reservas.map((reserva) => (
+              <div className="justify-between mt-5 gap-5" key={reserva.id}>
+                <ReserveCard>
+                  <p className="w-1/3">{reserva.reservas}</p>
+                  <p className="w-1/3">{reserva.nome}</p>
+                  <p className="w-1/3">{reserva.telefone}</p>
+                  <p className="w-1/4"><MdDelete/></p>
+                </ReserveCard>
+              </div>
+            ))
+          )}
+        </BoxCard>
       </div>
     </Base>
   )

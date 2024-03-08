@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Base from '../components/base';
 import supabase from '../services/supabase';
 import { useNavigate } from 'react-router-dom';
 import { Auth } from '@supabase/auth-ui-react';
