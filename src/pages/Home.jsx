@@ -7,6 +7,7 @@ import BoxCard from "../components/box-card"
 import { useReservas } from "../hooks/utils"
 import ReservationForm from "../components/reservation-form";
 import ReserveDelete from "../components/reserve-delete";
+import axios from "axios";
 
 function Home() {
 
@@ -17,6 +18,38 @@ function Home() {
   //Filtra as reservas que estão concluídas 
 
   const reservasPendentes = reservas.filter(reserva => reserva.status == 'PENDENTE')
+
+
+
+  const [novoStatus, setNovoStatus] = useState('')
+
+  const handleChangeStatus = async (reservaId, e) => {
+
+    const novoStatusSelecionado = e.target.value;
+
+    if (novoStatusSelecionado !== novoStatus) {
+     
+      try {
+
+        await axios.put(`https://system-barbeshop-1a0a77e5c400.herokuapp.com/reservas/${reservaId}`, {
+          status: novoStatusSelecionado
+        })
+
+        //Atualiza o estado local após a reposta do servidor
+        setNovoStatus(novoStatusSelecionado)
+        console.log('Status atualizado')
+
+      } catch (error) {
+
+        console.error('Erro ao atualizar status', error)
+      }
+
+    } else {
+      console.log('O status selecionado é o mesmo que o status atual da reserva')
+   }
+  }
+
+
 
   return (
     <Base>
@@ -54,11 +87,19 @@ function Home() {
                   </p>
                   <p className="w-1/5">{reserva.nomeCliente}</p>
                   <p className="w-1/5">{reserva.telefoneCliente}</p>
+                  
                   <p className="w-1/5">
-                    <select className="appearance-none row-start-1 col-start-1 bg-slate-50 ">
-                      <option>{reserva.status}</option>
-                    <option></option>
-                  </select></p>
+                    <select
+                      className="appearance-none row-start-1 col-start-1 bg-slate-50 "
+                      value={novoStatus}
+                      onChange={(e) => handleChangeStatus(reserva.id, e)}
+                    >
+                      
+                      <option value="PENDENTE">PENDENTE</option>
+                      <option value="CONFIRMADO">CONFIRMADO</option>
+                    </select>
+                    
+                  </p>
 
                   <ReserveDelete reserveId={reserva.id} />
                   
