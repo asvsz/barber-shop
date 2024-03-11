@@ -17,3 +17,4 @@ async function validateUser(name) {
         console.log('Erro ao criar barbearia:', e)
     }
 }
+

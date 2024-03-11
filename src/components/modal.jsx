@@ -7,7 +7,7 @@ function Modal({isOpen, onClose, children}) {
       <div className="bg-white p-6 rounded-lg z-50">
         {children}
         <div className=" flex justify-between">
-          <CustomButton name='salvar' onClick={onClose}>
+          <CustomButton type="submit" name='salvar' onClick={onClose}>
             Salvar
           </CustomButton>
           <CustomButton name='cancelar' onClick={onClose}>
