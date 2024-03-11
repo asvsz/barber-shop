@@ -10,7 +10,7 @@ const useReservas = () => {
   useEffect(() => {
     const getReservas = async () => {
       try {
-        const response = await axios.get(`${url}/clientes`);
+        const response = await axios.get(`${url}/reservas`);
         setReservas(response.data);
       } catch (error) {
         console.log('Erro ao pegar os dados:', error);
