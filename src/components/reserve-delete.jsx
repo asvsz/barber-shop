@@ -1,4 +1,7 @@
-function ReserveDelete() {
+import axios from "axios";
+import { MdDelete } from "react-icons/md";
+
+function ReserveDelete({reserveId}) {
 
   const handleDelete = async (id) => {
     try {
@@ -15,7 +18,7 @@ function ReserveDelete() {
     }
   }
   return (
-    <button className="w-1/5 text-2xl hover:text-red-600 pl-10" onClick={() => handleDelete(reserva.id)}>
+    <button className="w-1/5 text-2xl hover:text-red-600 pl-10" onClick={() => handleDelete(reserveId)}>
       <MdDelete />
     </button>
   )

@@ -5,8 +5,6 @@ import ReserveCard from "../components/reserve-card"
 import { IoMdAdd } from "react-icons/io";
 import BoxCard from "../components/box-card"
 import { useReservas } from "../hooks/utils"
-import { MdDelete } from "react-icons/md";
-import axios from "axios";
 import ReservationForm from "../components/reservation-form";
 import ReserveDelete from "../components/reserve-delete";
 
@@ -14,7 +12,11 @@ function Home() {
 
 
   const [modalOpen, setModalOpen] = useState(false);
-  const { reservas, postReservas } = useReservas();
+  const { reservas } = useReservas();
+
+  //Filtra as reservas que estão concluídas 
+
+  const reservasPendentes = reservas.filter(reserva => reserva.status == 'PENDENTE')
 
   return (
     <Base>
@@ -39,10 +41,10 @@ function Home() {
 
         <BoxCard>
           {/*Checagem se existe reservas */}
-          {reservas.length === 0 ? (
+          {reservasPendentes.length === 0 ? (
             <p>Carregando...</p>
           ) : (
-            reservas.map((reserva) => (
+            reservasPendentes.map((reserva) => (
               <div className="justify-between mt-5 gap-5" key={reserva.id}>
                 <ReserveCard>
 
@@ -55,10 +57,10 @@ function Home() {
                   <p className="w-1/5">
                     <select className="appearance-none row-start-1 col-start-1 bg-slate-50 ">
                       <option>{reserva.status}</option>
-                    <option>Concluído</option>
+                    <option></option>
                   </select></p>
 
-                  <ReserveDelete/>
+                  <ReserveDelete reserveId={reserva.id} />
                   
                 </ReserveCard>
               </div>
