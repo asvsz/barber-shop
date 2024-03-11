@@ -11,7 +11,16 @@ function Home() {
 
 
   const [modalOpen, setModalOpen] = useState(false);
-  const { reservas } = useReservas();
+  const { reservas, postReservas } = useReservas();
+
+  const handleSubmit = async (novosDados) => {
+    try {
+      await postReservas(novosDados)
+      console.log('Reserva enviada com sucesso')
+    } catch (error) {
+      console.error('Erro ao enviar os dados do formulário:', error)
+    }
+  }
 
   return (
     <Base>
@@ -42,10 +51,19 @@ function Home() {
             reservas.map((reserva) => (
               <div className="justify-between mt-5 gap-5" key={reserva.id}>
                 <ReserveCard>
-                  <p className="w-1/3">{reserva.reservas}</p>
-                  <p className="w-1/3">{reserva.nome}</p>
-                  <p className="w-1/3">{reserva.telefone}</p>
-                  <p className="w-1/4"><MdDelete/></p>
+
+                  <p className="w-1/4">
+                    {new Date(...reserva.horario.horario).toLocaleDateString()} <br />
+                    {new Date(...reserva.horario.horario).toLocaleTimeString()}
+                  </p>
+                  <p className="w-1/4">{reserva.nomeCliente}</p>
+                  <p className="w-1/4">{reserva.telefoneCliente}</p>
+                  <p className="w-1/4">
+                    <select className=" appearance-none row-start-1 col-start-1 bg-slate-50 ">
+                      <option>{reserva.status}</option>
+                    <option>Concluído</option>
+                  </select></p>
+                  <p className="w-1/5"><MdDelete/></p>
                 </ReserveCard>
               </div>
             ))
