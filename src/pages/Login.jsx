@@ -19,8 +19,7 @@ function Login() {
         navigate('/');
       }
     });
-
-    // call unsubscribe to remove the callback
+    
     return () => {
       data.subscription.unsubscribe()
     }
